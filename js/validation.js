@@ -1,114 +1,127 @@
 
-var fieldId, fieldVal, errMsg = '';
-var fieldErr = false;
-var errCount = 0;
-var fieldsArr = {fieldVal: {}, fieldErr: {}};
-var charRegEx = /^[a-zA-Z]*$/;
-var mailRegEx = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+){1,4}$/;
-
-//Adding Bootstrap Error Class 
-function addErrorClass(fieldId) {
-    $('#' + fieldId).parent().addClass("has-error has-feedback");
-    $('<span class="glyphicon glyphicon-remove form-control-feedback"></span>').insertAfter('#' + fieldId);
-    $('<small class="help-block"  style="display: block;">' + errMsg + '</small>').insertAfter('#' + fieldId + ':last');
-}
-
-//Adding Bootstrap Success Class
-function addSuccessClass(fieldId) {
-    $('#' + fieldId).parent().addClass("has-success has-feedback");
-    $('<span class="glyphicon glyphicon-ok form-control-feedback"></span>').insertAfter('#' + fieldId);
-}
-
-//Remove Bootstrap Error Class
-function removeSuccessClass(fieldId) {
-    $('#' + fieldId).parent().removeClass("has-success has-feedback");
-}
-
-//Remove Bootstrap Error Class 
-function removeErrorClass(fieldId) {
-    $('#' + fieldId).parent().removeClass("has-error has-feedback");
-    $('#' + fieldId).next().remove();
-    $('#' + fieldId).next().remove();
-}
-
-function ajaxEmailcheck(emailCheck) {
-    $.ajax({
-        url: "./validationCheck.php?email="+emailCheck,
-        type: 'GET',
-        success: function (data) {
-            if (data > 0){
-                $('#resText').html("No data");
-            } else {
-                $('#resText').html(data);
+$(function () {
+    $('#defaultForm').formValidation({
+        message: 'This value is not valid',
+//        live: 'disabled',
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            username: {
+                message: 'The username is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'The username is required and can\'t be empty'
+                    },
+                    remote: {
+                        type: 'POST',
+                        url: './validationCheck.php',
+                        message: 'The username is not available',
+                        delay: 1000
+                    }
+                }
+            },
+            firstName: {
+                validators: {
+                    notEmpty: {
+                        message: 'The first name is required and cannot be empty'
+                    }
+                }
+            },
+            lastName: {
+                validators: {
+                    notEmpty: {
+                        message: 'The last name is required and cannot be empty'
+                    }
+                }
+            },
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'The email address is required and can\'t be empty'
+                    },
+                    emailAddress: {
+                        message: 'The input is not a valid email address'
+                    },
+                    remote: {
+                        type: 'POST',
+                        url: './validationCheck.php',
+                        message: 'The email is not available',
+                        delay: 1000
+                    }
+                }
+            },
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: 'The password is required and can\'t be empty'
+                    },
+                    different: {
+                        field: 'username',
+                        message: 'The password can\'t be the same as username'
+                    }
+                }
+            },
+            confirmPassword: {
+                validators: {
+                    notEmpty: {
+                        message: 'The confirm password is required and can\'t be empty'
+                    },
+                    identical: {
+                        field: 'password',
+                        message: 'The password and its confirm are not the same'
+                    }
+                }
+            },
+            gender: {
+                validators: {
+                    notEmpty: {
+                        message: 'The gender is required'
+                    }
+                }
+            },
+            date: {
+                validators: {
+                    notEmpty: {
+                        message: 'The date is required'
+                    },
+                    date: {
+                        format: 'DD/MM/YYYY',
+                        message: 'The date is not a valid'
+                    }
+                }
             }
         }
-    });
-}
+    }).on('err.form.fv', function (e) {
+        console.log('err.form.fv');
 
+        // You can get the form instance and then access API
+        var $form = $(e.target);
+        console.log($form.data('formValidation').getInvalidFields());
 
-//Main function for check fields
-function mainCheckFunction(fieldId, checkIf, fieldVal) {
+        // If you want to prevent the default handler (formValidation._onError(e))
+        // e.preventDefault();
+    })
+            .on('success.form.fv', function (e) {
+                console.log('success.form.fv');
 
-    if (checkIf) {
-        errCount++;
-        fieldsArr.fieldErr[fieldId] = true;
-        if (errCount === 1) {
-            removeErrorClass(fieldId);
-            addErrorClass(fieldId);
-        }
-    } else {
-        removeErrorClass(fieldId);
-        errCount = 0;
-        addSuccessClass(fieldId);
-        fieldsArr.fieldErr[fieldId] = false;
-        fieldsArr.fieldVal[fieldId] = fieldVal;
-    }
-}
+                // If you want to prevent the default handler (formValidation._onSuccess(e))
+                // e.preventDefault();
+            })
+            .on('err.field.fv', function (e, data) {
+                console.log('err.field.fv -->', data);
+            })
+            .on('success.field.fv', function (e, data) {
+                console.log('success.field.fv -->', data);
+            })
+            .on('status.field.fv', function (e, data) {
+                // I don't want to add has-success class to valid field container
 
-
-$(function () {
-    $(':input').focus(function () {
-        //On Focus of input field get this id
-        fieldId = $(this).attr('id');
-
-        //Username Check
-        if (fieldId === 'username') {
-            $(this).keyup(function () {
-                fieldVal = $(this).val();
-                var checkIf = $(this).val().length <= 2;
-                mainCheckFunction(fieldId, checkIf, fieldVal);
-                errMsg = 'More 3 symbols';
+                // I want to enable the submit button all the time
+                data.fv.disableSubmitButtons(false);
             });
-        }
 
-        //First name and Last name Check
-        if (fieldId === 'firstName' || fieldId === 'lastName') {
-            $(this).keyup(function () {
-                emailCheck = $(this).val();
-                var checkIf = !charRegEx.test(fieldValcheck) || fieldValcheck == 0;
-                mainCheckFunction(fieldId, checkIf, fieldValcheck);
-                errMsg = 'Characters Only!';
-                fieldsArr.fieldErr
-            });
-        }
 
-        //Email Check
-        if (fieldId === 'email') {
-            $(this).keyup(function () {
-                fieldValcheck = $(this).val();
-                var checkIf = !mailRegEx.test(fieldValcheck) || fieldValcheck == 0;
-                mainCheckFunction(fieldId, checkIf, fieldValcheck);
-                errMsg = 'Incorrect mail!';
-                console.dir(fieldsArr.fieldErr.email);
-
-            });
-        }
-
-        $('#submit').click(function () {
-            ajaxEmailcheck('valeri4@gmail.com');
-//            $.each(fieldsArr.fieldVal, function (key, value) {
-//                console.dir(key + ": " + value);
-//            });
-        });
-    });
 });
