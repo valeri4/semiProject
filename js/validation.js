@@ -31,7 +31,22 @@ function removeErrorClass(fieldId) {
     $('#' + fieldId).next().remove();
 }
 
+function ajaxEmailcheck(emailCheck) {
+    $.ajax({
+        url: "./validationCheck.php?email="+emailCheck,
+        type: 'GET',
+        success: function (data) {
+            if (data > 0){
+                $('#resText').html("No data");
+            } else {
+                $('#resText').html(data);
+            }
+        }
+    });
+}
 
+
+//Main function for check fields
 function mainCheckFunction(fieldId, checkIf, fieldVal) {
 
     if (checkIf) {
@@ -53,7 +68,7 @@ function mainCheckFunction(fieldId, checkIf, fieldVal) {
 
 $(function () {
     $(':input').focus(function () {
-            //On Focus of input field get this id
+        //On Focus of input field get this id
         fieldId = $(this).attr('id');
 
         //Username Check
@@ -65,18 +80,18 @@ $(function () {
                 errMsg = 'More 3 symbols';
             });
         }
-        
+
         //First name and Last name Check
         if (fieldId === 'firstName' || fieldId === 'lastName') {
             $(this).keyup(function () {
-                fieldValcheck = $(this).val();
+                emailCheck = $(this).val();
                 var checkIf = !charRegEx.test(fieldValcheck) || fieldValcheck == 0;
                 mainCheckFunction(fieldId, checkIf, fieldValcheck);
                 errMsg = 'Characters Only!';
                 fieldsArr.fieldErr
             });
         }
-        
+
         //Email Check
         if (fieldId === 'email') {
             $(this).keyup(function () {
@@ -84,13 +99,16 @@ $(function () {
                 var checkIf = !mailRegEx.test(fieldValcheck) || fieldValcheck == 0;
                 mainCheckFunction(fieldId, checkIf, fieldValcheck);
                 errMsg = 'Incorrect mail!';
+                console.dir(fieldsArr.fieldErr.email);
+
             });
         }
 
         $('#submit').click(function () {
-            $.each(fieldsArr.fieldVal, function (key, value) {
-                console.dir(key + ": " + value);
-            });
+            ajaxEmailcheck('valeri4@gmail.com');
+//            $.each(fieldsArr.fieldVal, function (key, value) {
+//                console.dir(key + ": " + value);
+//            });
         });
     });
 });
