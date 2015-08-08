@@ -123,7 +123,7 @@ if ($_POST) {
                                             <label for="lastName">Last Name:</label>
                                             <input type="text" class="form-control" id="lastName" name="lastName">
                                         </div>
-                                        <div class="form-group has-error has-feedback">
+                                        <div class="form-group">
                                             <label for="email">Email address: *</label>
                                             <input type="email" class="form-control" id="email" name="email">
                                         </div>
@@ -155,7 +155,7 @@ if ($_POST) {
 
                                         <div class="form-group">
                                             <div class="col-lg-9 col-lg-offset-3">
-                                                <button type="submit" class="btn btn-primary">Sign up</button>
+                                                <button type="button" id="submit" class="btn btn-primary">Sign up</button>
                                             </div>
                                         </div>
                                     </form>
