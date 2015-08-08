@@ -1,49 +1,96 @@
 
-var feildId = '';
+var fieldId, fieldVal, errMsg = '';
+var fieldErr = false;
+var errCount = 0;
+var fieldsArr = {fieldVal: {}, fieldErr: {}};
+var charRegEx = /^[a-zA-Z]*$/;
+var mailRegEx = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+){1,4}$/;
 
 //Adding Bootstrap Error Class 
-function addErrorClass(feildId) {
-    $('#' + feildId).parent().addClass("has-error has-feedback");
-    $('<span class="glyphicon glyphicon-remove form-control-feedback"></span>').insertAfter('#' + feildId);
-    $('<small class="help-block"  style="display: block;">' +
-            'The input is not a valid email address</small>').insertAfter('#' + feildId + ':last');
+function addErrorClass(fieldId) {
+    $('#' + fieldId).parent().addClass("has-error has-feedback");
+    $('<span class="glyphicon glyphicon-remove form-control-feedback"></span>').insertAfter('#' + fieldId);
+    $('<small class="help-block"  style="display: block;">' + errMsg + '</small>').insertAfter('#' + fieldId + ':last');
+}
+
+//Adding Bootstrap Success Class
+function addSuccessClass(fieldId) {
+    $('#' + fieldId).parent().addClass("has-success has-feedback");
+    $('<span class="glyphicon glyphicon-ok form-control-feedback"></span>').insertAfter('#' + fieldId);
+}
+
+//Remove Bootstrap Error Class
+function removeSuccessClass(fieldId) {
+    $('#' + fieldId).parent().removeClass("has-success has-feedback");
 }
 
 //Remove Bootstrap Error Class 
-function removeErrorClass(feildId) {
-    $('#' + feildId).parent().removeClass("has-error has-feedback");
-    $('#' + feildId).next().remove();
-    $('#' + feildId).next().remove();
+function removeErrorClass(fieldId) {
+    $('#' + fieldId).parent().removeClass("has-error has-feedback");
+    $('#' + fieldId).next().remove();
+    $('#' + fieldId).next().remove();
 }
+
+
+function mainCheckFunction(fieldId, checkIf, fieldVal) {
+
+    if (checkIf) {
+        errCount++;
+        fieldsArr.fieldErr[fieldId] = true;
+        if (errCount === 1) {
+            removeErrorClass(fieldId);
+            addErrorClass(fieldId);
+        }
+    } else {
+        removeErrorClass(fieldId);
+        errCount = 0;
+        addSuccessClass(fieldId);
+        fieldsArr.fieldErr[fieldId] = false;
+        fieldsArr.fieldVal[fieldId] = fieldVal;
+    }
+}
+
 
 $(function () {
     $(':input').focus(function () {
-        var feildId = $(this).attr('id');
-        var feildErr = false;
-        var errCount = 0;
-        $(this).keypress(function () {
-            if ($(this).val().length < 3) {
-                feildErr = true;
-                errCount++;
+            //On Focus of input field get this id
+        fieldId = $(this).attr('id');
 
-                if (feildErr === true && errCount === 1) {
-                    addErrorClass(feildId);
-                }
-            }else{
-                removeErrorClass(feildId);
-                errCount = 0;
-            }
+        //Username Check
+        if (fieldId === 'username') {
+            $(this).keyup(function () {
+                fieldVal = $(this).val();
+                var checkIf = $(this).val().length <= 2;
+                mainCheckFunction(fieldId, checkIf, fieldVal);
+                errMsg = 'More 3 symbols';
+            });
+        }
+        
+        //First name and Last name Check
+        if (fieldId === 'firstName' || fieldId === 'lastName') {
+            $(this).keyup(function () {
+                fieldValcheck = $(this).val();
+                var checkIf = !charRegEx.test(fieldValcheck) || fieldValcheck == 0;
+                mainCheckFunction(fieldId, checkIf, fieldValcheck);
+                errMsg = 'Characters Only!';
+                fieldsArr.fieldErr
+            });
+        }
+        
+        //Email Check
+        if (fieldId === 'email') {
+            $(this).keyup(function () {
+                fieldValcheck = $(this).val();
+                var checkIf = !mailRegEx.test(fieldValcheck) || fieldValcheck == 0;
+                mainCheckFunction(fieldId, checkIf, fieldValcheck);
+                errMsg = 'Incorrect mail!';
+            });
+        }
 
-//            
-//                console.dir($(this).val().length);
+        $('#submit').click(function () {
+            $.each(fieldsArr.fieldVal, function (key, value) {
+                console.dir(key + ": " + value);
+            });
         });
-
     });
-
-
-//    $(':input').blur(function () {
-//        removeErrorClass(feildId);
-//    });
-
-
 });
