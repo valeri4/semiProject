@@ -14,7 +14,14 @@ $(document).ready(function () {
 //        $("#collapse1").collapse('toggle');
 //    });
 
-    $("#datepicker").datepicker({dateFormat: 'dd/mm/yy'});
+    $('#datePicker')
+            .datepicker({
+                format: 'dd/mm/yyyy'
+            })
+            .on('changeDate', function (e) {
+                // Revalidate the date field
+                $('#eventForm').formValidation('revalidateField', 'date');
+            });
 
 //    $('#about').tinymce({
 //    });
