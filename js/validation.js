@@ -120,8 +120,8 @@ $(function () {
     var email_logIn = $('#email_login');
     var pwd_logIn = $('#pwd_login');
     var fieldId, errMsg = '';
-    var emailErr = false;
-    var passErr = false;
+    var emailErrFlag = false;
+    var passErrFlag = false;
 
 
     //Adding Bootstrap Error Class 
@@ -162,18 +162,18 @@ $(function () {
                     if (data == 'email') {
                         fieldId = 'email_login';
                         errMsg = 'Wrong Email!';
-                        if (!emailErr) {
+                        if (!emailErrFlag) {
                             addErrorClass(fieldId, errMsg);
-                            emailErr = true;
+                            emailErrFlag = true;
                         }
                     }
                     //If wrong Password -> Add bootstrap error to field
                     if (data == 'password') {
                         fieldId = 'pwd_login';
                         errMsg = 'Wrong Password';
-                        if (!passErr) {
+                        if (!passErrFlag) {
                             addErrorClass(fieldId, errMsg);
-                            passErr = true;
+                            passErrFlag = true;
                         }
                     }
                     //If login passed -> redirect to index.php
@@ -184,20 +184,28 @@ $(function () {
             }
         });
     });
+    
+    
+    //If User press Enter on the login form -> Execute Submit
+    $('#formLogIn').keypress(function(e){
+        if(e.keyCode == 13){
+            $('#logInSubmit').click();
+        }
+    });
 
     //If email was wrong and user start typing -> Remove Bootstrap error class  
     $('#email_login').keydown(function () {
-        if (emailErr) {
+        if (emailErrFlag) {
             removeErrorClass('email_login');
-            emailErr = false;
+            emailErrFlag = false;
         }
     });
 
     //If email was wrong and user start typing -> Remove Bootstrap error class
     $('#pwd_login').keydown(function () {
-        if (passErr) {
+        if (passErrFlag) {
             removeErrorClass('pwd_login');
-            passErr = false;
+            passErrFlag = false;
         }
     });
 });

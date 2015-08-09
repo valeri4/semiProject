@@ -65,7 +65,7 @@
                         <div class="panel">
                             <div class="panel-body">
                                 <h1>Sign In</h1>
-                                <form role="form">
+                                <form role="form" id="formLogIn">
                                     <div class="form-group">
                                         <label for="email_login">Email address:</label>
                                         <input type="email" class="form-control" id="email_login" name="email_login">
