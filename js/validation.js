@@ -113,11 +113,16 @@ $(function () {
     });
 
 
-    /*
-     * Custom Login Form Validation
-     */
+    /**************************************/
+    /* Custom Login Form Validation      */
+    /*************************************/
 
+    var email_logIn = $('#email_login');
+    var pwd_logIn = $('#pwd_login');
     var fieldId, errMsg = '';
+    var emailErr = false;
+    var passErr = false;
+
 
     //Adding Bootstrap Error Class 
     function addErrorClass(fieldId, errMsg) {
@@ -126,11 +131,18 @@ $(function () {
         $('<small class="help-block"  style="display: block;">' + errMsg + '</small>').insertAfter('#' + fieldId + ':last');
     }
 
+    //Remove Bootstrap Error Class 
+    function removeErrorClass(fieldId) {
+        $('#' + fieldId).parent().removeClass("has-error has-feedback");
+        $('#' + fieldId).next().remove();
+        $('#' + fieldId).next().remove();
+    }
+
+
     //Email & Password Validation 
     $('#logInSubmit').click(function () {
-        var email_logIn = $('#email_login').val();
-        var pwd_logIn = $('#pwd_login').val();
-        var dataString = 'email_login=' + email_logIn + '&pwd_login=' + pwd_logIn;
+
+        var dataString = 'email_login=' + email_logIn.val() + '&pwd_login=' + pwd_logIn.val();
 
         $.ajax({
             type: "POST",
@@ -146,19 +158,45 @@ $(function () {
             success: function (data) {
                 if (data)
                 {
+                    //If wrong Email -> Add bootstrap error to field
                     if (data == 'email') {
                         fieldId = 'email_login';
                         errMsg = 'Wrong Email!';
-                        addErrorClass(fieldId, errMsg);
-                    } else {
+                        if (!emailErr) {
+                            addErrorClass(fieldId, errMsg);
+                            emailErr = true;
+                        }
+                    }
+                    //If wrong Password -> Add bootstrap error to field
+                    if (data == 'password') {
                         fieldId = 'pwd_login';
                         errMsg = 'Wrong Password';
-                        addErrorClass(fieldId,errMsg);
+                        if (!passErr) {
+                            addErrorClass(fieldId, errMsg);
+                            passErr = true;
+                        }
+                    }
+                    //If login passed -> redirect to index.php
+                    if (data == 'true') {
+                        window.location.href = "index.php";
                     }
                 }
             }
         });
-
     });
 
+
+    $('#email_login').keydown(function () {
+        if (emailErr) {
+            removeErrorClass('email_login');
+            emailErr = false;
+        }
+    });
+
+    $('#pwd_login').keydown(function () {
+        if (passErr) {
+            removeErrorClass('pwd_login');
+            passErr = false;
+        }
+    });
 });
