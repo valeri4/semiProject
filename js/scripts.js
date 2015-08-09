@@ -6,13 +6,13 @@ $(document).ready(function () {
         }
     });
 
-//    $(".btn-success").click(function () {
-//        $(".collapse").collapse('toggle');
-//    });
-//
-//    $("#collapsePwd").click(function () {
-//        $("#collapse1").collapse('toggle');
-//    });
+    $("#signUpFormCollaps").click(function () {
+        $(".collapse").collapse('toggle');
+    });
+
+    $("#collapsePwd").click(function () {
+        $("#collapse1").collapse('toggle');
+    });
 
     $('#datePicker')
             .datepicker({

@@ -45,7 +45,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="userinfo.php">Profile</a></li>
                                 <li class="divider"></li>
-                                <li><a href="logout.php">Log Out</a></li>
+                                <li><a href="users/logout.php">Log Out</a></li>
                             </ul>
                         </li>  
                     </ul>

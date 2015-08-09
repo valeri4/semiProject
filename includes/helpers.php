@@ -20,7 +20,7 @@ function login($userArr, $userId) {
     $_SESSION['u_id'] = $userId;
     $_SESSION['timeLogin'] = time();
     $_SESSION['loggedUser'] = $userArr;
-    redirect('index.php');
+    redirect('../index.php');
 }
 
 function userName(){

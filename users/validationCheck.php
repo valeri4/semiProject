@@ -1,16 +1,19 @@
 <?php
 
-include_once './includes/global.php';
+include_once '../includes/global.php';
 
 
-if ($_POST) {
+if (filter_input_array(INPUT_POST)) {
+
     
-    @$u_nickName = $_POST["username"];
-    @$u_email = $_POST["email"];
-    
+    //Username Validation Ajax query from login.php
+    $u_nickName = filter_input(INPUT_POST, 'username');
+    $u_email = filter_input(INPUT_POST, 'email');
+
     if ($u_nickName) {
-        $sql = "SELECT * FROM users 
-                        WHERE u_nickName ='$u_nickName' LIMIT 1";
+
+        $u_nickName = $dbCon->real_escape_string($u_nickName);
+        $sql = "SELECT u_nickName FROM users WHERE u_nickName ='$u_nickName' LIMIT 1";
         $result = $dbCon->query($sql);
         if (!$result) {
             die('Query failed: ' . $dbCon->error);
@@ -29,12 +32,12 @@ if ($_POST) {
             'valid' => $isAvailable,
         ));
     }
-    
-    if($u_email){
 
-
-        $sql = "SELECT * FROM users 
-                        WHERE u_email ='$u_email' LIMIT 1";
+    //Email Validation Ajax query from login.php
+    if ($u_email) {
+        
+        $u_email = $dbCon->real_escape_string($u_email);
+        $sql = "SELECT u_email FROM users WHERE u_email ='$u_email' LIMIT 1";
         $result = $dbCon->query($sql);
         if (!$result) {
             die('Query failed: ' . $dbCon->error);

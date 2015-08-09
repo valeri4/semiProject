@@ -123,3 +123,7 @@ h3.highlight  {
 }
 
 /* end theme */
+
+.loading{
+    visibility: hidden;
+}

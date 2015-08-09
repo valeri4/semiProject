@@ -1,5 +1,10 @@
 
 $(function () {
+
+    /*
+     * Registration Form Validation
+     */
+
     $('#defaultForm').formValidation({
         message: 'This value is not valid',
 //        live: 'disabled',
@@ -17,7 +22,7 @@ $(function () {
                     },
                     remote: {
                         type: 'POST',
-                        url: './validationCheck.php',
+                        url: 'users/validationCheck.php',
                         message: 'The username is not available',
                         delay: 1000
                     }
@@ -47,7 +52,7 @@ $(function () {
                     },
                     remote: {
                         type: 'POST',
-                        url: './validationCheck.php',
+                        url: 'users/validationCheck.php',
                         message: 'The email is not available',
                         delay: 1000
                     }
@@ -94,34 +99,66 @@ $(function () {
                 }
             }
         }
-    }).on('err.form.fv', function (e) {
-        console.log('err.form.fv');
+    }).on('success.form.fv', function (e) {
+        // Prevent form submission
+        e.preventDefault();
 
-        // You can get the form instance and then access API
-        var $form = $(e.target);
-        console.log($form.data('formValidation').getInvalidFields());
+        var $form = $(e.target),
+                fv = $(e.target).data('formValidation');
 
-        // If you want to prevent the default handler (formValidation._onError(e))
-        // e.preventDefault();
-    })
-            .on('success.form.fv', function (e) {
-                console.log('success.form.fv');
+        // Do whatever you want here ...
 
-                // If you want to prevent the default handler (formValidation._onSuccess(e))
-                // e.preventDefault();
-            })
-            .on('err.field.fv', function (e, data) {
-                console.log('err.field.fv -->', data);
-            })
-            .on('success.field.fv', function (e, data) {
-                console.log('success.field.fv -->', data);
-            })
-            .on('status.field.fv', function (e, data) {
-                // I don't want to add has-success class to valid field container
+        // Then submit the form as usual
+        fv.defaultSubmit();
+    });
 
-                // I want to enable the submit button all the time
-                data.fv.disableSubmitButtons(false);
-            });
 
+    /*
+     * Custom Login Form Validation
+     */
+
+    var fieldId, errMsg = '';
+
+    //Adding Bootstrap Error Class 
+    function addErrorClass(fieldId, errMsg) {
+        $('#' + fieldId).parent().addClass("has-error has-feedback");
+        $('<span class="glyphicon glyphicon-remove form-control-feedback"></span>').insertAfter('#' + fieldId);
+        $('<small class="help-block"  style="display: block;">' + errMsg + '</small>').insertAfter('#' + fieldId + ':last');
+    }
+
+    //Email & Password Validation 
+    $('#logInSubmit').click(function () {
+        var email_logIn = $('#email_login').val();
+        var pwd_logIn = $('#pwd_login').val();
+        var dataString = 'email_login=' + email_logIn + '&pwd_login=' + pwd_logIn;
+
+        $.ajax({
+            type: "POST",
+            url: "users/loginValidation.php",
+            data: dataString,
+            cache: false,
+            beforeSend: function () {
+                $("#loader").css("visibility", "visible");
+            },
+            complete: function () {
+                $("#loader").css("visibility", "hidden");
+            },
+            success: function (data) {
+                if (data)
+                {
+                    if (data == 'email') {
+                        fieldId = 'email_login';
+                        errMsg = 'Wrong Email!';
+                        addErrorClass(fieldId, errMsg);
+                    } else {
+                        fieldId = 'pwd_login';
+                        errMsg = 'Wrong Password';
+                        addErrorClass(fieldId,errMsg);
+                    }
+                }
+            }
+        });
+
+    });
 
 });

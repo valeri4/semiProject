@@ -7,6 +7,6 @@ header('Content-Type: text/html; charset=utf-8');
 
 session_start();
 
-include_once 'includes/helpers.php';
-include_once 'includes/connection.php';
+include_once 'helpers.php';
+include_once 'connection.php';
 ?>

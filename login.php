@@ -1,32 +1,3 @@
-<?php
-include_once './includes/global.php';
-
-@$u_email = $_POST["email"];
-@$u_pwd = $_POST["pwd"];
-
-if ($_POST) {
-
-    $sql = "SELECT * FROM users 
-                        WHERE u_email ='$u_email' LIMIT 1";
-    $result = $dbCon->query($sql);
-    if (!$result) {
-        die('Query failed: ' . $dbCon->error);
-    }
-
-    $userArr = $result->fetch_assoc();
-
-    if (password_verify($u_pwd, $userArr['u_pwd'])) {
-        login($userArr, $userArr['u_id']);
-    } else {
-        $invPwd = 'Invalid password.';
-    }
-
-    if ($userArr == NULL) {
-        redirect('login.php');
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -93,88 +64,94 @@ if ($_POST) {
 
                         <div class="panel">
                             <div class="panel-body">
-                                <!--                                <h1>Sign In</h1>
-                                                                <form id="defaultForm" role="form">
-                                                                    <div class="form-group">
-                                                                        <label for="email">Email address:</label>
-                                                                        <input type="email" class="form-control" id="email_login" name="email" autofocus="autofocus">
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label for="pwd">Password:</label>
-                                                                        <input type="password" class="form-control" id="pwd_login" name="pwd">
-                                                                    </div>
-                                                                    <button type="submit" class="btn btn-default">Sign In</button>
-                                
-                                                                </form>-->
+                                <h1>Sign In</h1>
+                                <form role="form">
+                                    <div class="form-group">
+                                        <label for="email_login">Email address:</label>
+                                        <input type="email" class="form-control" id="email_login" name="email_login">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pwd_login">Password:</label>
+                                        <input type="password" class="form-control" id="pwd_login" name="pwd_login">
+                                    </div>
+                                    <button type="button" class="btn btn-default" id="logInSubmit">Sign In</button>
+                                    <img src="img/ajax-loader.gif" alt="loading..." class="loading" id="loader"/>
+                                </form>
                                 <h5>OR</h5>
-                                <button type="button" class="btn btn-success">Sign Up</button>
+                                <button type="button" class="btn btn-success" id="signUpFormCollaps">Sign Up</button>
                                 <div class="collapse">
-                                    <h1>Sign Up</h1>
-                                    <form role="form" id="defaultForm">
-                                        <div class="form-group ">
-                                            <label for="username">Username: *</label>
-                                            <input type="text" class="form-control" id="username" name="username">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="firstName">First Name:</label>
-                                            <input type="text" class="form-control" id="firstName" name="firstName">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="lastName">Last Name:</label>
-                                            <input type="text" class="form-control" id="lastName" name="lastName">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="email">Email address: *</label>
-                                            <input type="email" class="form-control" id="email" name="email">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="password">Password: *</label>
-                                            <input type="password" class="form-control" id="password" name="password">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="confirmPassword">Retype password:</label>
-                                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="datepicker">Birth date:</label>
-                                            <input type="text" class="form-control" id="datepicker" name="eventDate" value="dd/mm/yyyy">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Gender</label>
+                                <h1>Sign Up</h1>
+                                <form role="form" id="defaultForm" action="users/registration.php" method="post">
+                                    <div class="form-group ">
+                                        <label for="username">Username: *</label>
+                                        <input type="text" class="form-control" id="username" name="username">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="firstName">First Name:</label>
+                                        <input type="text" class="form-control" id="firstName" name="firstName">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lastName">Last Name:</label>
+                                        <input type="text" class="form-control" id="lastName" name="lastName">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email address: *</label>
+                                        <input type="email" class="form-control" id="email" name="email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Password: *</label>
+                                        <input type="password" class="form-control" id="password" name="password">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="confirmPassword">Retype password:</label>
+                                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="datepicker">Birth date:</label>
+                                        <div class="input-group input-append date" id="datePicker">
+                                            <input type="text" class="form-control" name="date" />
+                                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>  
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Gender</label>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="gender" value="male" id="gender" /> Male
+                                            </label>
                                             <div class="radio">
                                                 <label>
-                                                    <input type="radio" name="gender" value="male" id="gender" /> Male
+                                                    <input type="radio" name="gender" value="female" id="gender" /> Female
                                                 </label>
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" name="gender" value="female" /> Female
-                                                    </label>
-                                                </div>
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <div class="form-group">
-                                            <div class="col-lg-9 col-lg-offset-3">
-                                                <button type="submit" class="btn btn-primary">Sign up</button>
-                                            </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-9 col-lg-offset-3">
+                                            <button type="submit" id="submit" class="btn btn-primary">Sign up</button>
                                         </div>
-                                    </form>
-                                </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-
                     </div>
+
                 </div>
             </div>
-        </header>
-        <!-- script references -->
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
-        <script src="js/formValidation.min.js" type="text/javascript"></script>
-        <script src="js/bootstrap.js" type="text/javascript"></script>
-        <script src="js/scripts.js"></script>
-        <script src="js/validation.js" type="text/javascript"></script>
+        </div>
+    </header>
+    <!-- script references -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="js/formValidation.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.js" type="text/javascript"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/validation.js" type="text/javascript"></script>
+    <script>
 
-    </body>
+    </script>
+
+</body>
 </html>
