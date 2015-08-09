@@ -185,7 +185,7 @@ $(function () {
         });
     });
 
-
+    //If email was wrong and user start typing -> Remove Bootstrap error class  
     $('#email_login').keydown(function () {
         if (emailErr) {
             removeErrorClass('email_login');
@@ -193,6 +193,7 @@ $(function () {
         }
     });
 
+    //If email was wrong and user start typing -> Remove Bootstrap error class
     $('#pwd_login').keydown(function () {
         if (passErr) {
             removeErrorClass('pwd_login');
