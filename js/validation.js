@@ -201,7 +201,7 @@ $(function () {
         }
     });
 
-    //If email was wrong and user start typing -> Remove Bootstrap error class
+    //If password was wrong and user start typing -> Remove Bootstrap error class
     $('#pwd_login').keydown(function () {
         if (passErrFlag) {
             removeErrorClass('pwd_login');
