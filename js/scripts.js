@@ -23,8 +23,8 @@ $(document).ready(function () {
                 $('#eventForm').formValidation('revalidateField', 'date');
             });
 
-//    $('#about').tinymce({
-//    });
+    $('#about').tinymce({
+    });
 
 
 });

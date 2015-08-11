@@ -1,7 +1,5 @@
 <?php
 include_once './includes/global.php';
-include_once './includes/helpers.php';
-include_once 'includes/auth.php';
 include_once './includes/header.php';
 
 //get userInfo from db
@@ -48,44 +46,61 @@ if ($_POST) {
 ?>
 
 <h2>Profile</h2>
-<form role="form" method="POST">
-    <div class="form-group">
-        <label for="email">Email address:</label>
-        <input type="email"  class="form-control" id="email" name="email" placeholder="<?= $userArr['u_email'] ?>" readonly>
+<form role="form">
+    <div class="form-group ">
+        <label for="username">Username: *</label>
+        <input type="text" class="form-control" id="username" name="username" readonly>
     </div>
     <div class="form-group">
-        <label for="nickName">Nickname:</label>
-        <input type="text" class="form-control" id="nickName" name="nickName" placeholder="<?= $userArr['u_nickName'] ?>" readonly>
+        <label for="firstName">First Name:</label>
+        <input type="text" class="form-control" id="firstName" name="firstName">
     </div>
     <div class="form-group">
-        <label for="f_name">First Name:</label>
-        <input type="text" class="form-control" id="f_name" name="f_name" value="<?= $userArr['u_f_name'] ?>">
+        <label for="lastName">Last Name:</label>
+        <input type="text" class="form-control" id="lastName" name="lastName">
     </div>
     <div class="form-group">
-        <label for="l_name">Last Name:</label>
-        <input type="text" class="form-control" id="l_name" name="l_name" value="<?= $userArr['u_l_name'] ?>">
+        <label for="email">Email address: *</label>
+        <input type="email" class="form-control" id="email" name="email" readonly>
     </div>
     <div class="form-group">
         <label for="datepicker">Birth date:</label>
-        <input type="text" class="form-control" id="datepicker" name="b_day" value="<?= $bdateview ?>">
+        <div class="input-group input-append date" id="datePicker">
+            <input type="text" class="form-control" name="date" />
+            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+        </div>  
+    </div>
+    <div class="form-group">
+        <label>Gender</label>
+        <div class="radio">
+            <label>
+                <input type="radio" name="gender" value="male" id="gender" readonly/> Male
+            </label>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="gender" value="female" id="gender" readonly/> Female
+                </label>
+            </div>
+        </div>
     </div>
     <div class="form-group">
         <label for="about">About myself:</label>
         <textarea class="form-control" rows="5" id="about" name="about"><?= $userArr['u_about'] ?>
         </textarea>
     </div>
-    <h3>Change Password</h3>
-    <hr>
-    <div class="form-group">
-        <label for="pwd">New Password:</label>
-        <input type="password" class="form-control" id="pwd" name="pwd">
-    </div>
-    <div class="form-group">
-        <label for="repwd">Re-Enter New Password:</label>
-        <input type="password" class="form-control" id="repwd">
-    </div>
+</form>
+<h3>Change Password</h3>
+<hr>
+<div class="form-group">
+    <label for="pwd">New Password:</label>
+    <input type="password" class="form-control" id="pwd" name="pwd">
+</div>
+<div class="form-group">
+    <label for="repwd">Re-Enter New Password:</label>
+    <input type="password" class="form-control" id="repwd">
+</div>
 
-    <button type="submit" class="btn btn-default">Save</button>
+<button type="submit" class="btn btn-default">Save</button>
 
 </form
 
