@@ -12,18 +12,26 @@ include_once './posts/showPosts.php';
         </div>
         <div class="perfonalInfo">
             <ul>
-                <li><strong>First Name:</strong>Valery</li>
-                <li><strong>Last Name:</strong>Dubina</li>
-                <li><strong>Birthday:</strong>20/04/89</li>
+                <li><strong>First Name: </strong>Valery</li>
+                <li><strong>Last Name: </strong>Dubina</li>
+                <li><strong>Birthday: </strong>20/04/89</li>
             </ul>
         </div>
         <div class="personalAbout">
-            
+            <p><strong>About me:</strong></p>
+            <div class="aboutText">
+                <p>gdfgdfgdfhg</p>
+                <ul>
+                    <li>xczxc<strong>dfdfsdfsd</strong></li>
+                    <li><strong>dfsdfsdf</strong></li>
+                    <li><strong>fgsfgsgfsgf</strong></li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
 
-<?=vd($_SESSION['loggedUser'])?>
+<?= vd($_SESSION['loggedUser']) ?>
 
 <div class="addPost">
     <h3>Add Post:</h3>
