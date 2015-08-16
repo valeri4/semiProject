@@ -4,8 +4,8 @@ function showPosts($dbCon) {
     $uId = userId();    //User Id Function from helpers
     $userName = userName(); //Username Function from helpers
 
-    $sql = "SELECT * FROM posts
-                        WHERE u_id ='$uId'";
+    //Select by DESC Time
+    $sql = "SELECT * FROM posts WHERE u_id = '$uId' ORDER BY p_time DESC ";
     $result = $dbCon->query($sql);
 
     if (!$result) {
