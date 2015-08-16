@@ -5,7 +5,7 @@ include_once './includes/header.php';
 
 
 //get userInfo from db and print into fields
-$uId = $_SESSION['u_id'];
+$uId = userId();
 
 $sql = "SELECT * FROM users 
                         WHERE u_id ='$uId' LIMIT 1";
@@ -71,6 +71,10 @@ if (filter_input_array(INPUT_POST)) {
     if (!$result) {
         die('Query failed : ' . $dbCon->error);
     }
+    
+    
+    //Updating user Information in SESSION
+    userArrRefresh($dbCon);
 
     //Refresh after userInfo updating
     redirect('userinfo.php');

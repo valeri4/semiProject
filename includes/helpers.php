@@ -1,6 +1,5 @@
 <?php
 
-
 function redirect($location) {
     header('Location: ' . $location);
     die();
@@ -23,17 +22,27 @@ function login($userArr, $userId) {
     redirect('../index.php');
 }
 
-function userId(){
+function userId() {
     $uId = $_SESSION['u_id'];
     return ($uId);
 }
 
-function userName(){
+function userName() {
     $userFname = $_SESSION['loggedUser']['u_f_name'];
     $userLname = $_SESSION['loggedUser']['u_l_name'];
-    return ($userFname." ".$userLname);
+    return ($userFname . " " . $userLname);
 }
 
-
-
-
+//Call this function to update user information in SESSION
+function userArrRefresh($dbCon) {
+    $uId = userId();
+    $sql = "SELECT * FROM users 
+                        WHERE u_id ='$uId' LIMIT 1";
+    $result = $dbCon->query($sql);
+    if (!$result) {
+        die('Query failed: ' . $dbCon->error);
+    }
+    $userArr = $result->fetch_assoc();
+    
+    $_SESSION['loggedUser'] = $userArr;
+}

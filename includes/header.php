@@ -57,7 +57,7 @@
         <header class="masthead">
             <div class="container">
                 <div class="row">
-                    <div class="col col-sm-6">
+                    <div class="col col-sm-6 logo">
                         <h1><a href="index.php" title="scroll down for your viewing pleasure">First Social Network</a></h1>
                         <p class="lead">Just try it...</p>
                     </div>
