@@ -1,7 +1,7 @@
 /* bootstrap 3 helpers */
 
 .navbar-form input, .form-inline input {
-	width:auto;
+    width:auto;
 }
 
 /* end */
@@ -9,81 +9,81 @@
 /* custom theme */
 
 header {
-	min-height:130px;
-  	margin-bottom:5px;
+    min-height:130px;
+    margin-bottom:5px;
 }
 
 @media (min-width: 979px) {
-  #sidebar.affix-top {
-      position: static;
-  }
-  
-  #sidebar.affix {
-      position: fixed;
-      top: 0;
-      width:21.2%;
-  }
+    #sidebar.affix-top {
+        position: static;
+    }
+
+    #sidebar.affix {
+        position: fixed;
+        top: 0;
+        width:21.2%;
+    }
 }
 
 .affix,.affix-top {
-   position:static;
+    position:static;
 }
 
 /* theme */
 
 body {
-  /* color:#828282; */
-  background-color:#eee;
+    /* color:#828282; */
+    background-color:#eee;
 }
 
 
 a,a:hover {
-	color: #F33;
-  	text-decoration:none;
+    color: #F33;
+    text-decoration:none;
 }
 
 .highlight-bk {
-	background-color:#ff3333;
+    background-color:#ff3333;
     padding:1px;
     width:100%;
 }
 
 .highlight {
-	color:#ff3333;
+    color:#ff3333;
 }
-  
+
 h3.highlight  {
-	padding-top:13px;
+    padding-top:13px;
     padding-bottom:14px;
-  	border-bottom:2px solid #ff3333;
+    border-bottom:2px solid #ff3333;
 }
 
 .navbar {
-	background-color:#ff3333;
-  	color:#ffffff;
+    background-color:#ff3333;
+    color:#ffffff;
     border:0;
-  	border-radius:0;
+    border-radius:0;
 }
 .navbar-nav > li > a {
-  	color:#fff;
-  	padding-left:20px;
-  	padding-right:20px;
-  	border-left:1px solid #ee3333;
+    color:#fff;
+    padding-left:20px;
+    padding-right:20px;
+    border-left:1px solid #ee3333;
 }
 .navbar-nav > li > a:hover, .navbar-nav > li > a:focus {
     color:#666666; 
 }
 .navbar-nav > li:last-child > a {
-  	border-right:1px solid #ee3333;
+    border-right:1px solid #ee3333;
 }
 .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
     color: #ffffff;
-	background-color:transparent;
+    background-color:transparent;
 }
 .navbar-nav > .open > a, .navbar-nav > .open > a:hover, .navbar-nav > .open > a:focus {
-	color: #f0f0f0;
-	background-color:transparent;
-  	opacity:.9;
+    color: #f0f0f0;
+    background-color:transparent;
+    opacity:.9;
     border-color:#ff3333;
 }
 
@@ -93,46 +93,46 @@ h3.highlight  {
 }
 
 .accordion-group {
-	border-width:0;
+    border-width:0;
 }
 
 .dropdown-menu {
-	min-width: 250px;
+    min-width: 250px;
 }
 
 .accordion-heading .accordion-toggle, .accordion-inner, .nav-stacked li > a {
-	padding-left:1px;
+    padding-left:1px;
 }
 
 .caret {
-	color:#fff;
+    color:#fff;
 }
 
 .navbar-toggle {
-	color:#fff;
+    color:#fff;
     border-width:0;
 }
-  
+
 .navbar-toggle:hover {
-	background-color:#fff;
+    background-color:#fff;
 }
 
 .panel {
-	padding-left:27px;
-    
-	padding-right:27px;
+    padding-left:27px;
+
+    padding-right:27px;
 }
 
 h2{
-	display: inline-block;
+    display: inline-block;
 }
 
 
 
 /*Post block Start*/
 p{
-	display: inline-block;
-	margin: 20px 0 10px;
+    display: inline-block;
+    margin: 20px 0 10px;
 }
 
 .userTime{
@@ -146,7 +146,7 @@ p{
 }
 
 .userName {
-	font-weight: 600;
+    font-weight: 600;
 }
 
 .addPost{
@@ -164,7 +164,7 @@ p{
 }
 
 .postContainer{
-	margin: 40px 0 30px;
+    margin: 40px 0 30px;
 }
 
 
@@ -185,12 +185,32 @@ p{
 }
 
 .profileImg img{
-  max-width: 154px;
-  max-height: 154px;
+    max-width: 154px;
+    max-height: 154px;
 }
 
 .perfonalInfo{
     display: inline-block;
+    height: 154px;
+    border: 1px solid #000; 
+}
+
+.perfonalInfo ul{
+    list-style-type: none;
+    padding: 10px 0 0 20px;
+}
+
+.perfonalInfo li{
+    padding: 3px;
+}
+
+.personalAbout{
+    display: inline-block;
+    max-height: 154px;
+}
+
+.personalAbout p{
+    margin: 5px 0;  
 }
 /*User Info Block End*/
 
