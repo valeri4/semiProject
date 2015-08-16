@@ -9,7 +9,7 @@
 /* custom theme */
 
 header {
-	min-height:230px;
+	min-height:130px;
   	margin-bottom:5px;
 }
 
@@ -122,6 +122,56 @@ h3.highlight  {
 	padding-right:27px;
 }
 
+h2{
+	display: inline-block;
+}
+
+
+
+/*Post block Start*/
+p{
+	display: inline-block;
+	margin: 20px 0 10px;
+}
+
+
+hr{
+	margin: 0 0 10px;
+}
+
+
+.userTime{
+    padding: 0 10px;
+    border-bottom: 1px solid #E0E0DD;
+    background-color: #F5F5F5;
+}
+
+.userTime p{
+    margin: 10px 0 10px;
+}
+
+.userName {
+	font-weight: 600;
+}
+
+.addPost{
+    margin-top: 40px;
+}
+
+.post{
+    border: 1px solid #E0E0DD;
+    margin-bottom: 30px;
+}
+
+.postText p{
+    margin: 10px;
+}
+
+.postContainer{
+	margin: 40px 0 30px;
+}
+
+/*Post block End*/
 /* end theme */
 
 .loading{

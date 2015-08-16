@@ -9,4 +9,3 @@ session_start();
 
 include_once 'helpers.php';
 include_once 'connection.php';
-?>

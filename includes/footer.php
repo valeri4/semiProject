@@ -1,5 +1,5 @@
  </div>
-                </div> 
+                </div>
             </div>
         </div>
 
@@ -9,6 +9,11 @@
         <script src="js/tinymce/jquery.tinymce.min.js" type="text/javascript"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
         <script src="js/tinymce/tinymce.min.js"></script>
+         <script src="js/lib/formValidation.min.js" type="text/javascript"></script>
+        <script src="js/lib/bootstrap.js"></script>
+        <script src="js/validation.js"></script>
+        <script src="js/userInfoValid.js"></script>
         <script src="js/scripts.js"></script>
+        <script src="js/userPosts.js"></script>
     </body>
 </html>

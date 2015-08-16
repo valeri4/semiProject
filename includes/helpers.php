@@ -23,9 +23,17 @@ function login($userArr, $userId) {
     redirect('../index.php');
 }
 
+function userId(){
+    $uId = $_SESSION['u_id'];
+    return ($uId);
+}
+
 function userName(){
     $userFname = $_SESSION['loggedUser']['u_f_name'];
     $userLname = $_SESSION['loggedUser']['u_l_name'];
-   echo $userFname." ".$userLname;
+    return ($userFname." ".$userLname);
 }
+
+
+
 

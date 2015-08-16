@@ -6,6 +6,7 @@ $(document).ready(function () {
         }
     });
 
+    //Sign Up Collaps in login.php
     $("#signUpFormCollaps").click(function () {
         $(".collapse").collapse('toggle');
     });
@@ -24,7 +25,7 @@ $(document).ready(function () {
             });
 
     $('#about').tinymce({
+        menubar: false
     });
-
 
 });

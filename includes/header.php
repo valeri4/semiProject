@@ -66,19 +66,6 @@
                 </div>
             </div>
 
-            <div class="container">
-                <div class="row">
-                    <div class="col col-sm-12">
-                        <div class="panel">
-                            <div class="panel-body">
-                                <div class="col col-sm-6">
-                                    <h4><a href=""></a> profile</h4>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
         </header>
 
         <!-- Begin Body -->
