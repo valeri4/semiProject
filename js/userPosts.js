@@ -22,7 +22,7 @@ $(function () {
                     var htmlPostVar = '<div class="post"><div class="userTime"><p class="userName">'+json['userName']+'</p><p class="pull-right">'+json['dateTime']+'</p></div><div class="postText">'+json['userPostText']+'</div></div>';
                     
                     
-                    $(".post:last").after(htmlPostVar);
+                    $(".post:first").before(htmlPostVar);
                 }
             }
         });
