@@ -10,8 +10,10 @@ if (filter_input_array(INPUT_POST)) {
     
     $test2 = 'No Matches';
     
+
+    
     if($searchQuery == $test){
-        echo json_encode($test);
+        echo json_encode(array($test));
     }else{
         echo json_encode($test2);
     }   

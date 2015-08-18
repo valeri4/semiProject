@@ -14,7 +14,7 @@ $(function () {
                     q: request.term
                 },
                 success: function (data) {
-                    console.dir(data);
+                    response( data );
                 }
             });
         },
