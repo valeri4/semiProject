@@ -17,9 +17,8 @@ if (!$result) {
 
 $userArr = $result->fetch_assoc();
 
-$date = date_create($userArr['u_b_day']);
-$bdateview = date_format($date, 'd/m/Y');
-
+//Custom Function in helpers.php
+$bdateview = dateFormat($userArr['u_b_day']);
 
 $male_status = 'unchecked';
 $female_status = 'unchecked';
@@ -71,8 +70,8 @@ if (filter_input_array(INPUT_POST)) {
     if (!$result) {
         die('Query failed : ' . $dbCon->error);
     }
-    
-    
+
+
     //Updating user Information in SESSION
     userArrRefresh($dbCon);
 

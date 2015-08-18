@@ -3,35 +3,10 @@ include_once 'includes/global.php';
 include_once 'includes/auth.php';
 include_once 'includes/header.php';
 include_once './posts/showPosts.php';
+include_once './users/myInfoBlock.php';
 ?>
-<div class="userInfoContainer">
-    <h3>My Page:</h3>
-    <div class="userInfo">
-        <div class="profileImg">
-            <img src="css/images/man.jpg" alt="Profile Photo"/>
-        </div>
-        <div class="perfonalInfo">
-            <ul>
-                <li><strong>First Name: </strong>Valery</li>
-                <li><strong>Last Name: </strong>Dubina</li>
-                <li><strong>Birthday: </strong>20/04/89</li>
-            </ul>
-        </div>
-        <div class="personalAbout">
-            <p><strong>About me:</strong></p>
-            <div class="aboutText">
-                <p>gdfgdfgdfhg</p>
-                <ul>
-                    <li>xczxc<strong>dfdfsdfsd</strong></li>
-                    <li><strong>dfsdfsdf</strong></li>
-                    <li><strong>fgsfgsgfsgf</strong></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
 
-<?= vd($_SESSION['loggedUser']) ?>
+<?= viewInfoBlock() ?>
 
 <div class="addPost">
     <h3>Add Post:</h3>

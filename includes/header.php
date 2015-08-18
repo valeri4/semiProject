@@ -9,6 +9,7 @@
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" />
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
         <!--[if lt IE 9]>
                 <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
@@ -23,7 +24,7 @@
                 <div class="nav-collapse collase">
                     <ul class="nav navbar-nav">  
                         <li><a href="index.php">Home</a></li>
-                        <li><a href="#">Find Friends</a></li>
+                        <li><a href="findFriends.php">Find Friends</a></li>
                         <li><a href="#">My Friends</a></li>
                         <li><a href="#">Relationships</a></li>
                     </ul>

@@ -189,6 +189,12 @@ p{
     max-height: 154px;
 }
 
+.infoTest{
+    display: inline-block;
+    height: 154px;
+    max-height: 154px;
+}
+
 .perfonalInfo{
     display: inline-block;
     height: 154px;
@@ -207,12 +213,25 @@ p{
 .personalAbout{
     display: inline-block;
     max-height: 154px;
+    padding: 0;
 }
 
 .personalAbout p{
-    margin: 5px 0;  
+    margin: 5px 0; 
+}
+
+.aboutText{
+    display: inline-block;
 }
 /*User Info Block End*/
+
+
+/*Find Friends Start*/
+.ui-autocomplete-loading {
+    background: white url("../img/ajax-loader.gif") right center no-repeat;
+}
+#city { width: 25em; }
+/*Find Friends End*/
 
 /* end theme */
 

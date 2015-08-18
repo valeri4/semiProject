@@ -33,6 +33,12 @@ function userName() {
     return ($userFname . " " . $userLname);
 }
 
+function dateFormat($userDate) {
+    $date = date_create($userDate);
+    $bdateview = date_format($date, 'd/m/Y');
+    return ($bdateview);
+}
+
 //Call this function to update user information in SESSION
 function userArrRefresh($dbCon) {
     $uId = userId();
@@ -43,6 +49,6 @@ function userArrRefresh($dbCon) {
         die('Query failed: ' . $dbCon->error);
     }
     $userArr = $result->fetch_assoc();
-    
+
     $_SESSION['loggedUser'] = $userArr;
 }
