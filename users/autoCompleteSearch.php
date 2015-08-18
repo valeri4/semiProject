@@ -15,7 +15,7 @@ if (filter_input_array(INPUT_POST)) {
     if($searchQuery == $test){
         echo json_encode(array($test));
     }else{
-        echo json_encode($test2);
+        echo json_encode(array($test2));
     }   
 }
 
