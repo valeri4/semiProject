@@ -66,9 +66,6 @@ $(function () {
         var $form = $(e.target),
             fv = $(e.target).data('formValidation');
 
-        // Do whatever you want here ...
-
-        // Then submit the form as usual
         fv.defaultSubmit();
     });
 });

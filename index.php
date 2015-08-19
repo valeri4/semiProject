@@ -8,6 +8,7 @@ include_once './users/myInfoBlock.php';
 
 <?= viewInfoBlock() ?>
 
+
 <div class="addPost">
     <h3>Add Post:</h3>
     <form role="form" method="POST" action="posts/addShowPosts.php" class="formPost">

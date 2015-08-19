@@ -76,7 +76,7 @@ if (filter_input_array(INPUT_POST)) {
     userArrRefresh($dbCon);
 
     //Refresh after userInfo updating
-    redirect('userinfo.php');
+    redirect('index.php');
 }
 ?>
 

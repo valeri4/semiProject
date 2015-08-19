@@ -23,8 +23,7 @@ $(function () {
                     remote: {
                         type: 'POST',
                         url: 'users/validationCheck.php',
-                        message: 'The username is not available',
-                        delay: 1000
+                        message: 'The username is not available'
                     }
                 }
             },
@@ -53,8 +52,7 @@ $(function () {
                     remote: {
                         type: 'POST',
                         url: 'users/validationCheck.php',
-                        message: 'The email is not available',
-                        delay: 1000
+                        message: 'The email is not available'
                     }
                 }
             },

@@ -52,3 +52,8 @@ function userArrRefresh($dbCon) {
 
     $_SESSION['loggedUser'] = $userArr;
 }
+
+
+function checkIFfriendORloggedUser(){
+    
+}

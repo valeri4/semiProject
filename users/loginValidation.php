@@ -26,7 +26,7 @@ if (filter_input_array(INPUT_POST)) {
     if (password_verify($u_pwd, $userArr['u_pwd'])) {
         $_SESSION['auth'] = true;
         $_SESSION['u_id'] = $userArr['u_id'];
-        $_SESSION['timeLogin'] = time();
+        $_SESSION['timeLogin'] = time() + (60 * 60 * 24 * 365);
         $_SESSION['loggedUser'] = $userArr;
         
         echo 'true';

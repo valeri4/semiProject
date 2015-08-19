@@ -4,7 +4,7 @@ $(function () {
         $("#log").scrollTop(0);
     }
 
-    $("#city").autocomplete({
+    $("#userSearch").autocomplete({
         source: function (request, response) {
             $.ajax({
                 type: "POST",
